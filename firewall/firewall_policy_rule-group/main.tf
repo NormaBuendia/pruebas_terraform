@@ -1,7 +1,7 @@
 locals {
-  policies = jsondecode(file("policy.json"))
+  policies = jsondecode(var.policies)  # Decodificar el JSON cargado desde Terragrunt
+  create   = var.create                # Usamos la variable "create" para controlar la creación
 }
-
 ################################################################################
 # Grupo de Reglas Stateless
 ################################################################################
@@ -81,26 +81,6 @@ resource "aws_networkfirewall_firewall_policy" "example" {
 ################################################################################
 # Firewall
 ################################################################################
-# resource "aws_networkfirewall_firewall" "example" {
-#   name                = var.firewall_name
-#   firewall_policy_arn = aws_networkfirewall_firewall_policy.example.arn
-#   vpc_id              = var.vpc_id
-#   description         = var.description
-
-#   dynamic "subnet_mapping" {
-#     for_each = var.subnet_ids
-#     content {
-#       subnet_id       = subnet_mapping.value
-#     }
-#   }
-
-#   tags = var.tags
-
-#   delete_protection               = var.delete_protection
-#   firewall_policy_change_protection = var.firewall_policy_change_protection
-#   subnet_change_protection        = var.subnet_change_protection
-# }
-
 resource "aws_networkfirewall_firewall" "example" {
   name                = var.firewall_name
   firewall_policy_arn = aws_networkfirewall_firewall_policy.example.arn
