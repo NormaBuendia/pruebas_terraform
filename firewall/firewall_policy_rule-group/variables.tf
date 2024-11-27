@@ -104,10 +104,10 @@ variable "firewall_policy_description" {
   type        = string
 }
 
-variable "policies" {
-  description = "Políticas de configuración del firewall, cargadas desde un archivo JSON externo"
-  type        = string
-}
+# variable "policies" {
+#   description = "Políticas de configuración del firewall, cargadas desde un archivo JSON externo"
+#   type        = string
+# }
 
 ################################################################################
 # Variables Generales para la Configuración del Firewall

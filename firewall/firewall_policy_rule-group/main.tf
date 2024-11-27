@@ -1,6 +1,5 @@
 locals {
-  policies = jsondecode(var.policies)  # Decodificar el JSON cargado desde Terragrunt
-  create   = var.create                # Usamos la variable "create" para controlar la creación
+  policies = jsondecode(file("policy.json"))
 }
 ################################################################################
 # Grupo de Reglas Stateless
