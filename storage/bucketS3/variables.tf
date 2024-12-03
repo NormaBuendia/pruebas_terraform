@@ -13,7 +13,7 @@ variable "description" {
   type        = string
 }
 
-variable "name" {
+variable "bucket_name" {
   description = "El nombre del bucket"
   type        = string
 }
