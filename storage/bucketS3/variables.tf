@@ -18,10 +18,10 @@ variable "bucket_name" {
   type        = string
 }
 
-variable "acl" {
-  description = "Control de acceso del bucket"
-  type        = string
-}
+# variable "acl" {
+#   description = "Control de acceso del bucket"
+#   type        = string
+# }
 
 variable "block_public_acls" {
   description = "Si Amazon S3 debería bloquear las ACL públicas para este depósito"
