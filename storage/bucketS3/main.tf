@@ -1,12 +1,24 @@
-terraform {
-  backend "s3" {}
-}
+# terraform {
+#   backend "s3" {}
+# }
+
+# resource "aws_s3_bucket" "s3_bucket" {
+#   bucket = var.name
+#   acl    = var.acl # Define el nivel de acceso (como "private", "public-read").
+#   tags = var.tags
+# }
 
 resource "aws_s3_bucket" "s3_bucket" {
   bucket = var.name
-  acl    = var.acl # Define el nivel de acceso (como "private", "public-read").
   tags = var.tags
 }
+
+resource "aws_s3_bucket_acl" "s3_bucket_acl" {
+  bucket = aws_s3_bucket.s3_bucket.id
+  acl    = var.acl # Define el nivel de acceso (como "private", "public-read").
+}
+
+
 #Configura controles de propiedad en el bucket.
 resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
   bucket = aws_s3_bucket.s3_bucket.id
