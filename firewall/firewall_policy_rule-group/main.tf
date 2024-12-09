@@ -96,7 +96,12 @@ resource "aws_networkfirewall_firewall_policy" "example" {
 ################################################################################
 resource "aws_networkfirewall_firewall" "example" {
   name                = var.firewall_name  # Nombre del firewall.
-  firewall_policy_arn = aws_networkfirewall_firewall_policy.example.arn  # ARN de la política de firewall.
+   # Usa el ARN del JSON si no está vacío, de lo contrario crea una política nueva.
+  firewall_policy_arn = try(
+    local.policies.firewall_policy_arn != "" ? local.policies.firewall_policy_arn : null,
+    aws_networkfirewall_firewall_policy.example.arn
+    )
+
   vpc_id              = var.vpc_id         # ID de la VPC asociada.
   description         = var.description    # Descripción opcional del firewall.
 
